@@ -2,7 +2,6 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import db from '../config/db.js';
 
-
 export const register = (req, res) => {
   const { name, email, password, confirmPassword } = req.body;
   if (password !== confirmPassword) {
@@ -18,7 +17,6 @@ export const register = (req, res) => {
   });
 };
 
-
 export const login = (req, res) => {
   const { email, password } = req.body;
   db.query('SELECT * FROM users WHERE email = ?', [email], (err, results) => {
@@ -27,7 +25,7 @@ export const login = (req, res) => {
       return res.status(500).json({ message: 'Database error', error: err });
     }
     if (results.length === 0) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: 'Invalid email address' });
     }
     const user = results[0];
     const isPasswordValid = bcrypt.compareSync(password, user.password);
@@ -36,5 +34,19 @@ export const login = (req, res) => {
     }
     const token = jwt.sign({ id: user.id }, 'your_jwt_secret', { expiresIn: '1h' });
     res.json({ message: 'Login successful', token });
+  });
+};
+
+export const checkEmail = (req, res) => {
+  const { email } = req.body;
+  db.query('SELECT * FROM users WHERE email = ?', [email], (err, results) => {
+    if (err) {
+      console.error('Database error:', err);
+      return res.status(500).json({ message: 'Database error', error: err });
+    }
+    if (results.length === 0) {
+      return res.status(404).json({ message: 'Invalid email address' });
+    }
+    res.status(200).json({ message: 'Email is valid' });
   });
 };

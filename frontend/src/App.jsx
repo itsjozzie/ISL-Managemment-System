@@ -11,6 +11,8 @@ import PageNotFound from "./screens/error/PageNotFound";
 import Projects from "./components/projects/Projects";
 import AllProjects from "./components/projects/AllProjects";
 import AddProject from "./components/projects/AddNewProject";
+import UpdateProject from "./components/projects/UpdateProject";
+import ProjectDetail from "./components/projects/ProjectDetail";
 import ProjectReports from "./components/projects/ProjectReports";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
@@ -20,6 +22,7 @@ import AllPersonnel from "./components/personnel/AllPersonnel";
 import AddPersonnel from "./components/personnel/AddPersonnel";
 import Assignments from "./components/personnel/PersonnelAssignments";
 import PersonnelDetails from "./components/personnel/PersonnelDetails";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -39,29 +42,24 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/logout" element={<LogoutPage />} />
-        <Route path="*" element={<PageNotFound />} />
-
-       
-        {isAuthenticated ? (
-          <>
-            <Route element={<BaseLayout />}>
-              <Route path="/" element={<DashboardScreen />} />
-              <Route path="/projects/*" element={<Projects />}>
-                <Route path="all" element={<AllProjects />} />
-                <Route path="add" element={<AddProject />} />
-                <Route path="reports" element={<ProjectReports />} />
-              </Route>
-              <Route path="/personnel/*" element={<Personnel />}>
-                <Route path="all" element={<AllPersonnel />} />
-                <Route path="add" element={<AddPersonnel />} />
-                <Route path="assignments" element={<Assignments />} />
-                <Route path=":id" element={<PersonnelDetails />} />
-              </Route>
-            </Route>
-          </>
-        ) : (
-          <Route path="/" element={<Navigate to="/login" />} />
-        )}
+        
+        <Route path="/" element={isAuthenticated ? <BaseLayout /> : <Navigate to="/login" />}>
+          <Route index element={isAuthenticated ? <DashboardScreen /> : <Navigate to="/login" />} />
+          <Route path="/projects/*" element={isAuthenticated ? <Projects /> : <Navigate to="/login" />}>
+            <Route path="all" element={<AllProjects />} />
+            <Route path="add" element={<AddProject />} />
+            <Route path="update/:id" element={<UpdateProject />} />
+            <Route path=":id" element={<ProjectDetail />} />
+            <Route path="reports" element={<ProjectReports />} />
+          </Route>
+          <Route path="/personnel/*" element={isAuthenticated ? <Personnel /> : <Navigate to="/login" />}>
+            <Route path="all" element={<AllPersonnel />} />
+            <Route path="add" element={<AddPersonnel />} />
+            <Route path="assignments" element={<Assignments />} />
+            <Route path="details/:id" element={<PersonnelDetails />} />
+          </Route>
+          <Route path="*" element={<PageNotFound />} />
+        </Route>
       </Routes>
 
       <button

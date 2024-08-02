@@ -8,7 +8,7 @@ const UserProfile = () => {
         </div>
       <div className="profile-info">
         <h5>PROJECT MANAGER</h5>
-        <h6>richard teja</h6>
+        <h6>RICHARD TAJI</h6>
       </div>
     </div>
   );

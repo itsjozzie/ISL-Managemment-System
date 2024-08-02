@@ -5,9 +5,8 @@ function LogoutPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.removeItem('token');
-
-    navigate('/login');
+    localStorage.removeItem('token'); 
+    navigate('/login'); 
   }, [navigate]);
 
   return (

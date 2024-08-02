@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './AddNewProject.scss';
 
 function AddNewProject() {
@@ -9,25 +10,36 @@ function AddNewProject() {
   const [endDate, setEndDate] = useState('');
   const [status, setStatus] = useState('');
   const [clientId, setClientId] = useState('');
+  const navigate = useNavigate(); // Hook for programmatic navigation
 
   const handleAddProject = async (e) => {
     e.preventDefault();
+
+    const formattedStartDate = new Date(startDate).toISOString().split('T')[0];
+    const formattedEndDate = new Date(endDate).toISOString().split('T')[0];
+
     try {
       const response = await axios.post('http://localhost:5000/api/projects', {
         name,
         description,
-        start_date: startDate,
-        end_date: endDate,
+        start_date: formattedStartDate,
+        end_date: formattedEndDate,
         status,
         client_id: clientId
       });
       alert(response.data.message);
+      
+      // Redirect to the list of projects after successful addition
+      navigate('/projects/all');
+      
+      // Clear form fields
       setName('');
       setDescription('');
       setStartDate('');
       setEndDate('');
       setStatus('');
       setClientId('');
+      
     } catch (error) {
       alert(error.response ? error.response.data.message : 'An error occurred');
     }

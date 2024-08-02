@@ -6,11 +6,15 @@ import './AllProjects.scss';
 function AllProjects() {
   const [projects, setProjects] = useState([]);
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US'); // Customize as needed
+  };
+
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/projects');
-
         setProjects(response.data);
       } catch (error) {
         console.error('Error fetching projects', error);
@@ -41,11 +45,12 @@ function AllProjects() {
               <td>{p.id}</td>
               <td>{p.name}</td>
               <td>{p.description}</td>
-              <td>{p.start_date}</td>
-              <td>{p.end_date}</td>
+              <td>{formatDate(p.start_date)}</td>
+              <td>{formatDate(p.end_date)}</td>
               <td>{p.status}</td>
               <td>{p.client_id}</td>
               <td>
+                <Link to={`/projects/update/${p.id}`}>Update</Link>
                 <Link to={`/projects/${p.id}`}>Details</Link>
               </td>
             </tr>
