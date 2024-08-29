@@ -1,0 +1,34 @@
+.client-detail {
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+  
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+  
+    .edit-button, .interactions-button {
+      display: inline-block;
+      margin-right: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+  
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+  
+    .edit-button {
+      background-color: #007bff;
+    }
+  
+    .interactions-button {
+      background-color: #28a745;
+    }
+  }
+  

@@ -1,0 +1,52 @@
+$background-color: #fafafa;
+$border-color: #e6e6e6;
+$primary-color: #475be8;
+$light-color: #ffffff;
+$hover-color: #3b4c9a;
+
+.project-page {
+  padding: 20px;
+  background-color: $background-color;
+  border-radius: 8px;
+  box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px;
+}
+
+.project-page h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.project-page form {
+  display: flex;
+  flex-direction: column;
+
+  div {
+    margin-bottom: 10px;
+  }
+
+  label {
+    font-weight: 600;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+  }
+
+  button {
+    align-self: flex-start;
+    padding: 10px 20px;
+    background-color: $primary-color;
+    color: $light-color;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $hover-color;
+    }
+  }
+}

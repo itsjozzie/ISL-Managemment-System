@@ -42,7 +42,6 @@ export const getProjectById = (req, res) => {
 export const updateProject = (req, res) => {
   const { id } = req.params;
   const { name, description, start_date, end_date, status, client_id } = req.body;
-
   db.query(
     'UPDATE projects SET name = ?, description = ?, start_date = ?, end_date = ?, status = ?, client_id = ?, updated_at = NOW() WHERE id = ?',
     [name, description, start_date, end_date, status, client_id, id],
