@@ -7,4 +7,12 @@ const db = createConnection({
   database: 'isms'
 });
 
+db.connect(err => {
+  if (err) {
+    console.error('Database connection error:', err);
+    return;
+  }
+  console.log('Connected to the database.');
+});
+
 export default db;

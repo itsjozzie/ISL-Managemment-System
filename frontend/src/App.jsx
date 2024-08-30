@@ -145,56 +145,55 @@ function App() {
           </Route>
 
           {/* Routes for Finance Department */}
-          <Route path="/finance" element={<ProtectedRoute element={<FinanceBaseLayout />} />}>
-            <Route index element={<RedirectToDashboard />} />
+          <Route path="/finance/*" element={<ProtectedRoute element={<FinanceBaseLayout />} />}>
             <Route path="dashboard" element={<FinanceDashboard />} />
 
             {/* Accounts */}
-            <Route path="accounts/*" element={<Accounts />}>
+            <Route path="accounts" element={<Accounts />}>
               <Route path="payable" element={<AccountsPayable />} />
               <Route path="receivable" element={<AccountsReceivable />} />
             </Route>
 
             {/* Budgets */}
-            <Route path="budgets/*" element={<Budgets />}>
+            <Route path="budgets" element={<Budgets />}>
               <Route path="current" element={<CurrentBudget />} />
               <Route path="requests" element={<BudgetRequests />} />
             </Route>
 
             {/* Reports */}
-            <Route path="reports/*" element={<Reports />}>
+            <Route path="reports" element={<Reports />}>
               <Route path="financial" element={<FinancialReports />} />
               <Route path="expense" element={<ExpenseReports />} />
               <Route path="revenue" element={<RevenueAnalysis />} />
             </Route>
 
             {/* Compliance */}
-            <Route path="compliance/*" element={<Compliance />}>
+            <Route path="compliance" element={<Compliance />}>
               <Route path="audit" element={<Audit />} />
               <Route path="overview" element={<ComplianceOverview />} />
             </Route>
 
             {/* Analytics */}
-            <Route path="analytics/*" element={<Analytics />}>
+            <Route path="analytics" element={<Analytics />}>
               <Route path="kpis" element={<KPIs />} />
               <Route path="trends" element={<Trends />} />
             </Route>
 
             {/* Settings */}
-            <Route path="settings/*" element={<Settings />}>
+            <Route path="settings" element={<Settings />}>
               <Route path="financial" element={<FinancialSettings />} />
               <Route path="user-management" element={<UserManagement />} />
               <Route path="integrations" element={<Integrations />} />
             </Route>
 
             {/* Support */}
-            <Route path="support/*" element={<Support />}>
+            <Route path="support" element={<Support />}>
               <Route path="help-center" element={<HelpCenter />} />
               <Route path="contact" element={<ContactSupport />} />
             </Route>
 
             {/* Profile */}
-            <Route path="profile/*" element={<Profile />}>
+            <Route path="profile" element={<Profile />}>
               <Route path="view" element={<ViewProfile />} />
               <Route path="edit" element={<EditProfile />} />
             </Route>
@@ -217,15 +216,13 @@ function App() {
         </Route>
       </Routes>
 
-      {/* Theme Toggle */}
       <div className="theme-toggle">
-        <button onClick={toggleTheme}>
-          {theme === DARK_THEME ? (
-            <img src={SunIcon} alt="Light Mode" />
-          ) : (
-            <img src={MoonIcon} alt="Dark Mode" />
-          )}
-        </button>
+        <img
+          src={theme === DARK_THEME ? SunIcon : MoonIcon}
+          alt="Theme Toggle Icon"
+          onClick={toggleTheme}
+          className="theme-toggle-icon"
+        />
       </div>
     </Router>
   );

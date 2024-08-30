@@ -8,7 +8,7 @@ function AllProjects() {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US'); 
+    return date.toLocaleDateString('en-US');
   };
 
   const getStatusClass = (status) => {
@@ -40,7 +40,7 @@ function AllProjects() {
         });
         setProjects(response.data);
       } catch (error) {
-        console.error('Error fetching projects', error.message || error);
+        console.error('Error fetching projects:', error.response?.data?.message || error.message || error);
       }
     };
     fetchProjects();
