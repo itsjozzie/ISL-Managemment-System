@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import db from '../config/db.js';
 
-// Register a new user with role
+// Register a new user
 export const register = (req, res) => {
   const { name, email, password, confirmPassword, role } = req.body;
 
@@ -12,7 +12,7 @@ export const register = (req, res) => {
     return res.status(400).json({ message: 'Invalid role' });
   }
 
-  // Check password confirmation
+  // Check if passwords match
   if (password !== confirmPassword) {
     return res.status(400).json({ message: 'Passwords do not match' });
   }
@@ -20,43 +20,65 @@ export const register = (req, res) => {
   // Hash the password
   const hashedPassword = bcrypt.hashSync(password, 8);
 
-  // Insert user into the database
-  db.query('INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)', 
-  [name, email, hashedPassword, role], 
-  (err, result) => {
-    if (err) {
-      console.error('Database error:', err);
-      return res.status(500).json({ message: 'Database error', error: err });
-    }
-    res.status(201).json({ message: 'User registered successfully' });
-  });
-};
-
-// Login user and return JWT with role
-export const login = (req, res) => {
-  const { email, password } = req.body;
-
-  // Find user by email
+  // Check if email already exists
   db.query('SELECT * FROM users WHERE email = ?', [email], (err, results) => {
     if (err) {
       console.error('Database error:', err);
-      return res.status(500).json({ message: 'Database error', error: err });
+      return res.status(500).json({ message: 'Database error' });
     }
+
+    if (results.length > 0) {
+      return res.status(400).json({ message: 'Email already exists' });
+    }
+
+    // Insert user into the database
+    db.query(
+      'INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)',
+      [name, email, hashedPassword, role],
+      (err, result) => {
+        if (err) {
+          console.error('Database error:', err);
+          return res.status(500).json({ message: 'Database error' });
+        }
+        return res.status(201).json({ message: 'User registered successfully' });
+      }
+    );
+  });
+};
+
+// Login a user
+export const login = (req, res) => {
+  const { email, password } = req.body;
+
+  // Check if the user exists in the database
+  db.query('SELECT * FROM users WHERE email = ?', [email], (err, results) => {
+    if (err) {
+      console.error('Database error:', err);
+      return res.status(500).json({ message: 'Database error' });
+    }
+
     if (results.length === 0) {
       return res.status(404).json({ message: 'Invalid email address' });
     }
+
     const user = results[0];
-    
-    // Check if password is correct
+
+    // Validate password
     const isPasswordValid = bcrypt.compareSync(password, user.password);
     if (!isPasswordValid) {
       return res.status(401).json({ message: 'Invalid password' });
     }
 
-    // Generate JWT token
-    const token = jwt.sign({ id: user.id, role: user.role }, 'your_jwt_secret', { expiresIn: '1h' });
+    // Generate a JWT token
+    const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET || 'your_jwt_secret', {
+      expiresIn: '1h'
+    });
 
-    res.json({ message: 'Login successful', token, role: user.role });
+    return res.json({
+      message: 'Login successful',
+      token,
+      role: user.role
+    });
   });
 };
 
@@ -64,10 +86,11 @@ export const login = (req, res) => {
 export const checkEmail = (req, res) => {
   const { email } = req.body;
 
+  // Query the database to check for the email
   db.query('SELECT * FROM users WHERE email = ?', [email], (err, results) => {
     if (err) {
       console.error('Database error:', err);
-      return res.status(500).json({ message: 'Database error', error: err });
+      return res.status(500).json({ message: 'Database error' });
     }
     if (results.length === 0) {
       return res.status(404).json({ message: 'Invalid email address' });

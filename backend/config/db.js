@@ -1,5 +1,6 @@
 import { createConnection } from 'mysql2';
 
+// Create MySQL connection
 const db = createConnection({
   host: 'localhost',
   user: 'root',
@@ -7,12 +8,14 @@ const db = createConnection({
   database: 'isms'
 });
 
+// Connect to the database
 db.connect(err => {
   if (err) {
     console.error('Database connection error:', err);
-    return;
+    process.exit(1);
+  } else {
+    console.log('Connected to the database.');
   }
-  console.log('Connected to the database.');
 });
 
 export default db;
