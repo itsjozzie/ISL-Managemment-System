@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeContext } from "./project_department/context/ThemeContext";
-import { DARK_THEME, LIGHT_THEME } from "./project_department/constants/themeConstants";
+import { DARK_THEME } from "./project_department/constants/themeConstants";
 import MoonIcon from "./assets/icons/moon.svg";
 import SunIcon from "./assets/icons/sun.svg";
 import './App.scss';
@@ -9,12 +9,13 @@ import './App.scss';
 // Import layouts and screens for all departments
 import BaseLayout from "./project_department/layout/BaseLayout";
 import FinanceBaseLayout from "./finance_department/layout/FinanceBaseLayout";
+import SalesBaseLayout from "./sales_department/layout/SalesBaseLayout";
 import PageNotFound from "./project_department/screens/error/PageNotFound";
 import UnauthorizedPage from "./project_department/screens/error/UnauthorizedPage";
 import DashboardScreen from "./project_department/screens/dashboard/DashboardScreen";
 import FinanceDashboard from "./finance_department/screens/dashboard/FinanceDashboard";
 import HRDashboard from "./HR_department/screens/dashboard/HRDashboard";
-import SalesDashboard from "./sales_department/screens/dashboard/DashboardScreen";
+import SalesDashboard from "./sales_department/screens/dashboard/SalesDashboard";
 import OperationDashboard from "./operation_department/screens/dashboard/DashboardScreen";
 import TechnicalDashboard from "./technical_department/screens/dashboard/DashboardScreen";
 
@@ -79,11 +80,7 @@ function App() {
   const userRole = localStorage.getItem('role');
 
   useEffect(() => {
-    if (theme === DARK_THEME) {
-      document.body.classList.add("dark-mode");
-    } else {
-      document.body.classList.remove("dark-mode");
-    }
+    document.body.classList.toggle("dark-mode", theme === DARK_THEME);
   }, [theme]);
 
   const ProtectedRoute = ({ element }) => (
@@ -95,15 +92,15 @@ function App() {
       case 'finance':
         return <Navigate to="/finance/dashboard" />;
       case 'hr':
-        return <Navigate to="/hr-dashboard" />;
+        return <Navigate to="/hr/dashboard" />;
       case 'sales':
-        return <Navigate to="/sales-dashboard" />;
+        return <Navigate to="/sales/dashboard" />;
       case 'operation':
-        return <Navigate to="/operation-dashboard" />;
+        return <Navigate to="/operation/dashboard" />;
       case 'technical':
-        return <Navigate to="/technical-dashboard" />;
+        return <Navigate to="/technical/dashboard" />;
       case 'project':
-        return <Navigate to="/project-dashboard" />;
+        return <Navigate to="/project/dashboard" />;
       default:
         return <Navigate to="/unauthorized" />;
     }
@@ -122,22 +119,22 @@ function App() {
           <Route index element={<RedirectToDashboard />} />
 
           {/* Routes for Project Department */}
-          <Route path="/project-dashboard" element={<DashboardScreen />} />
-          <Route path="/projects/*" element={<Projects />}>
+          <Route path="/project/dashboard" element={<DashboardScreen />} />
+          <Route path="/projects/*" element={<Projects />} >
             <Route path="all" element={<AllProjects />} />
             <Route path="add" element={<AddProject />} />
             <Route path="update/:id" element={<UpdateProject />} />
             <Route path=":id" element={<ProjectDetail />} />
             <Route path="reports" element={<ProjectReports />} />
           </Route>
-          <Route path="/personnel/*" element={<Personnel />}>
+          <Route path="/personnel/*" element={<Personnel />} >
             <Route path="all" element={<AllPersonnel />} />
             <Route path="add" element={<AddPersonnel />} />
             <Route path="assignments" element={<Assignments />} />
             <Route path="details/:id" element={<PersonnelDetails />} />
             <Route path="update/:id" element={<UpdatePersonnel />} />
           </Route>
-          <Route path="/clients/*" element={<Clients />}>
+          <Route path="/clients/*" element={<Clients />} >
             <Route path="all" element={<Clients />} />
             <Route path="add" element={<AddClient />} />
             <Route path="details/:id" element={<ClientDetail />} />
@@ -149,67 +146,67 @@ function App() {
             <Route path="dashboard" element={<FinanceDashboard />} />
 
             {/* Accounts */}
-            <Route path="accounts" element={<Accounts />}>
+            <Route path="accounts" element={<Accounts />} >
               <Route path="payable" element={<AccountsPayable />} />
               <Route path="receivable" element={<AccountsReceivable />} />
             </Route>
 
             {/* Budgets */}
-            <Route path="budgets" element={<Budgets />}>
+            <Route path="budgets" element={<Budgets />} >
               <Route path="current" element={<CurrentBudget />} />
               <Route path="requests" element={<BudgetRequests />} />
             </Route>
 
             {/* Reports */}
-            <Route path="reports" element={<Reports />}>
+            <Route path="reports" element={<Reports />} >
               <Route path="financial" element={<FinancialReports />} />
               <Route path="expense" element={<ExpenseReports />} />
               <Route path="revenue" element={<RevenueAnalysis />} />
             </Route>
 
             {/* Compliance */}
-            <Route path="compliance" element={<Compliance />}>
+            <Route path="compliance" element={<Compliance />} >
               <Route path="audit" element={<Audit />} />
               <Route path="overview" element={<ComplianceOverview />} />
             </Route>
 
             {/* Analytics */}
-            <Route path="analytics" element={<Analytics />}>
+            <Route path="analytics" element={<Analytics />} >
               <Route path="kpis" element={<KPIs />} />
               <Route path="trends" element={<Trends />} />
             </Route>
 
             {/* Settings */}
-            <Route path="settings" element={<Settings />}>
+            <Route path="settings" element={<Settings />} >
               <Route path="financial" element={<FinancialSettings />} />
               <Route path="user-management" element={<UserManagement />} />
               <Route path="integrations" element={<Integrations />} />
             </Route>
 
             {/* Support */}
-            <Route path="support" element={<Support />}>
+            <Route path="support" element={<Support />} >
               <Route path="help-center" element={<HelpCenter />} />
               <Route path="contact" element={<ContactSupport />} />
             </Route>
 
             {/* Profile */}
-            <Route path="profile" element={<Profile />}>
+            <Route path="profile" element={<Profile />} >
               <Route path="view" element={<ViewProfile />} />
               <Route path="edit" element={<EditProfile />} />
             </Route>
           </Route>
 
           {/* Routes for HR Department */}
-          <Route path="/hr-dashboard" element={<HRDashboard />} />
+          <Route path="/hr/dashboard" element={<HRDashboard />} />
 
           {/* Routes for Sales Department */}
-          <Route path="/sales-dashboard" element={<SalesDashboard />} />
+          <Route path="/sales/*" element={<ProtectedRoute element={<SalesDashboard />} />} />
 
           {/* Routes for Operations Department */}
-          <Route path="/operation-dashboard" element={<OperationDashboard />} />
+          <Route path="/operation/dashboard" element={<OperationDashboard />} />
 
           {/* Routes for Technical Department */}
-          <Route path="/technical-dashboard" element={<TechnicalDashboard />} />
+          <Route path="/technical/dashboard" element={<TechnicalDashboard />} />
 
           <Route path="/unauthorized" element={<UnauthorizedPage />} />
           <Route path="*" element={<PageNotFound />} />
@@ -221,7 +218,6 @@ function App() {
           src={theme === DARK_THEME ? SunIcon : MoonIcon}
           alt="Theme Toggle Icon"
           onClick={toggleTheme}
-          className="theme-toggle-icon"
         />
       </div>
     </Router>
@@ -229,4 +225,3 @@ function App() {
 }
 
 export default App;
- 

@@ -1,17 +1,16 @@
+import React from "react";
 import { Outlet } from "react-router-dom";
-import { Sidebar } from "../components";
+import SalesSidebar from "../components/sidebar/SalesSidebar";
 
-const BaseLayout = () => {
+const SalesBaseLayout = () => {
   return (
-    <main className="page-wrapper">
-      {/* left of page */}
-      <Sidebar />
-      {/* right side/content of the page */}
-      <div className="content-wrapper">
+    <div className="sales-base-layout">
+      <SalesSidebar />
+      <main className="sales-content">
         <Outlet />
-      </div>
-    </main>
+      </main>
+    </div>
   );
 };
 
-export default BaseLayout;
+export default SalesBaseLayout;
