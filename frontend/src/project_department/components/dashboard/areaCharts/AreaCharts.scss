@@ -1,23 +1,23 @@
 .content-area-charts {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 2fr 1fr; // Two columns: one wider for the chart
   gap: 16px;
+  width: 100%; // Full width to center the grid
 
   @media (max-width: 992px) {
-    grid-template-columns: 100%;
+    grid-template-columns: 100%; // Stack on small screens
   }
 }
-
 
 .bar-chart {
   background-color: var(--secondary-color);
   padding: 16px 16px 6px 16px;
-  border-radius: 5px;
+  border-radius: 12px; // Increased border-radius for a softer look
   box-shadow: var(--light-shadow1);
   position: relative;
 
   @media (max-width: 768px) {
-    padding: 12px;
+    padding: 12px; // Adjust padding for smaller screens
   }
 
   .bar-chart-wrapper {
@@ -37,7 +37,7 @@
 
   .bar-chart-title {
     margin-bottom: 12px;
-    font-size: 18px;
+    font-size: 20px; // Slightly larger title for better visibility
     font-weight: 700;
     color: var(--text-color-inverted);
   }
@@ -50,7 +50,7 @@
 
   .info-data-value {
     color: var(--xl-text-color);
-    font-size: 24px;
+    font-size: 26px; // Increased font size for emphasis
     font-weight: 700;
   }
 
@@ -66,6 +66,7 @@
     top: -90px;
     right: 0;
   }
+
   .recharts-tooltip-label {
     color: var(--text-color-inverted);
     font-size: 14px;
@@ -75,12 +76,12 @@
 
 .progress-bar {
   padding: 16px;
-  border-radius: 5px;
+  border-radius: 12px; // Increased border-radius for a softer look
   box-shadow: var(--light-shadow1);
   background: var(--secondary-color);
 
   @media (max-width: 768px) {
-    padding: 12px;
+    padding: 12px; // Adjust padding for smaller screens
   }
 
   .progress-bar-title {
@@ -89,6 +90,7 @@
     color: var(--text-color-inverted);
     margin-bottom: 16px;
   }
+
   .bar-item-info {
     display: flex;
     align-items: center;
@@ -102,6 +104,7 @@
       font-weight: 600;
     }
   }
+
   .progress-bar-list {
     display: grid;
     row-gap: 20px;
@@ -110,7 +113,7 @@
   .bar-item-full {
     width: 100%;
     height: 10px;
-    border-radius: 100vh;
+    border-radius: 100vh; // Pill shape for the progress bar
     background-color: var(--chart-secondary-color);
     position: relative;
   }
@@ -121,7 +124,8 @@
     left: 0;
     height: 100%;
     width: 0;
-    border-radius: 100vh;
+    border-radius: 100vh; // Pill shape for the filled part
     background-color: var(--chart-primary-color);
+    transition: width 0.3s ease; // Smooth transition for filling
   }
 }

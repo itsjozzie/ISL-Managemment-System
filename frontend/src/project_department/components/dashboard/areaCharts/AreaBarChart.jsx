@@ -29,9 +29,7 @@ const AreaBarChart = () => {
   const { theme } = useContext(ThemeContext);
 
   const formatTooltipValue = (value) => `${value}k`;
-
   const formatYAxisLabel = (value) => `${value}k`;
-
   const formatLegendValue = (value) =>
     value.charAt(0).toUpperCase() + value.slice(1);
 
@@ -51,12 +49,7 @@ const AreaBarChart = () => {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart
             data={data}
-            margin={{
-              top: 5,
-              right: 5,
-              left: 0,
-              bottom: 5,
-            }}
+            margin={{ top: 5, right: 5, left: 0, bottom: 5 }}
           >
             <XAxis
               padding={{ left: 10 }}
@@ -79,10 +72,7 @@ const AreaBarChart = () => {
               }}
               tickLine={false}
             />
-            <Tooltip
-              formatter={formatTooltipValue}
-              cursor={{ fill: "transparent" }}
-            />
+            <Tooltip formatter={formatTooltipValue} cursor={{ fill: "transparent" }} />
             <Legend
               iconType="circle"
               iconSize={10}
@@ -90,18 +80,8 @@ const AreaBarChart = () => {
               align="right"
               formatter={formatLegendValue}
             />
-            <Bar
-              dataKey="profit"
-              fill="#475be8"
-              barSize={24}
-              radius={[4, 4, 4, 4]}
-            />
-            <Bar
-              dataKey="loss"
-              fill="#e3e7fc"
-              barSize={24}
-              radius={[4, 4, 4, 4]}
-            />
+            <Bar dataKey="profit" fill="#475be8" barSize={24} radius={[4, 4, 0, 0]} />
+            <Bar dataKey="loss" fill="#e3e7fc" barSize={24} radius={[0, 0, 4, 4]} />
           </BarChart>
         </ResponsiveContainer>
       </div>

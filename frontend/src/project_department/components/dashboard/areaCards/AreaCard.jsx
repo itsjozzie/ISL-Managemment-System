@@ -1,10 +1,5 @@
 import PropTypes from "prop-types";
-import {
-  PieChart,
-  Pie,
-  Cell,
-  Tooltip,
-} from "recharts";
+import { PieChart, Pie, Cell, Tooltip } from "recharts";
 
 const AreaCard = ({ colors, percentFillValue, cardInfo }) => {
   const filledValue = (percentFillValue / 100) * 360;
@@ -15,8 +10,8 @@ const AreaCard = ({ colors, percentFillValue, cardInfo }) => {
     { name: "Achieved Sales", value: filledValue },
   ];
 
-  const renderTooltipContent = () => {
-    return `Tzs{(value / 360) * 100} %`;
+  const renderTooltipContent = (value) => {
+    return `${((value / 360) * 100).toFixed(2)}%`; // Fixed the percentage calculation
   };
 
   return (
@@ -37,7 +32,7 @@ const AreaCard = ({ colors, percentFillValue, cardInfo }) => {
             paddingAngle={0}
             dataKey="value"
             startAngle={-270}
-            endAngle={150}
+            endAngle={90} // Adjusted end angle for better visualization
             stroke="none"
           >
             {data.map((entry, index) => (
@@ -54,10 +49,10 @@ const AreaCard = ({ colors, percentFillValue, cardInfo }) => {
   );
 };
 
-export default AreaCard;
-
 AreaCard.propTypes = {
   colors: PropTypes.array.isRequired,
   percentFillValue: PropTypes.number.isRequired,
   cardInfo: PropTypes.object.isRequired,
 };
+
+export default AreaCard;

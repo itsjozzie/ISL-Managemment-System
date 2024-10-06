@@ -4,13 +4,13 @@ import { AreaCards, AreaCharts, AreaTable, AreaTop } from "../../components";
 import UserProfile from "../../components/UserProfile/UserProfile"; 
 import LoadingSpinner from "../../components/LoadingSpinner";
 import "./Dashboard.scss";
+
 const DashboardScreen = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    
     const token = localStorage.getItem('token');
     if (token) {
       setIsAuthenticated(true);
@@ -36,10 +36,13 @@ const DashboardScreen = () => {
         <AreaCards />
         <AreaCharts />
         <AreaTable />
-      </div>
-      <div className="profile-area">
+        
+        <div className="profile-area">
         <UserProfile />
+       </div>
       </div>
+      
+      
     </div>
   );
 };

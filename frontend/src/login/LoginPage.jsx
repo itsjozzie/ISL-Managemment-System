@@ -12,6 +12,7 @@ function LoginPage() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  // Handle the first step of email submission
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -19,7 +20,7 @@ function LoginPage() {
     try {
       const response = await axios.post("http://localhost:5000/api/auth/check-email", { email });
       if (response.status === 200) {
-        setStep(2);
+        setStep(2); // Proceed to password entry step if email is valid
       } else {
         setError("Unexpected response from server.");
       }
@@ -31,6 +32,7 @@ function LoginPage() {
     }
   };
 
+  // Handle the login process
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -49,27 +51,27 @@ function LoginPage() {
           navigate("/finance/dashboard");
           break;
         case 'hr':
-          navigate("/hr-dashboard");
+          navigate("/hr/dashboard");
           break;
         case 'project':
-          navigate("/project-dashboard");
+          navigate("/project/dashboard");
           break;
         case 'sales':
-          navigate("/sales-dashboard");
+          navigate("/sales/dashboard");
           break;
         case 'operation':
-          navigate("/operation-dashboard");
+          navigate("/operation/dashboard");
           break;
         case 'technical':
-          navigate("/technical-dashboard");
+          navigate("/technical/dashboard");
           break;
         default:
-          navigate("/");
+          navigate("/"); // Fallback for any undefined roles
           break;
       }
     } catch (error) {
       console.error("Login error:", error);
-      setError(error.response ? error.response.data.message : "An error occurred");
+      setError(error.response ? error.response.data.message : "An error occurred during login");
     } finally {
       setLoading(false);
     }

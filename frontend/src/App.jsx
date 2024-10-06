@@ -10,6 +10,10 @@ import './App.scss';
 import BaseLayout from "./project_department/layout/BaseLayout";
 import FinanceBaseLayout from "./finance_department/layout/FinanceBaseLayout";
 import SalesBaseLayout from "./sales_department/layout/SalesBaseLayout";
+import HRBaseLayout from "./HR_department/layout/HRBaseLayout";
+import OperationBaseLayout from "./operation_department/layout/OperationBaseLayout";
+import TechnicalBaseLayout from "./technical_department/layout/TechnicalBaseLayout";
+
 import PageNotFound from "./project_department/screens/error/PageNotFound";
 import UnauthorizedPage from "./project_department/screens/error/UnauthorizedPage";
 import DashboardScreen from "./project_department/screens/dashboard/DashboardScreen";
@@ -57,22 +61,6 @@ import Reports from "./finance_department/components/reports/Reports";
 import FinancialReports from "./finance_department/components/reports/FinancialReports";
 import ExpenseReports from "./finance_department/components/reports/ExpenseReports";
 import RevenueAnalysis from "./finance_department/components/reports/RevenueAnalysis";
-import Compliance from "./finance_department/components/compliance/Compliance";
-import Audit from "./finance_department/components/compliance/Audit";
-import ComplianceOverview from "./finance_department/components/compliance/ComplianceOverview";
-import Analytics from "./finance_department/components/analytics/Anallytics";
-import KPIs from "./finance_department/components/analytics/KPIs";
-import Trends from "./finance_department/components/analytics/Trends";
-import Settings from "./finance_department/components/settings/Settings";
-import FinancialSettings from "./finance_department/components/settings/FinancialSettings";
-import UserManagement from "./finance_department/components/settings/UserManagement";
-import Integrations from "./finance_department/components/settings/Integrations";
-import Support from "./finance_department/components/support/Support";
-import HelpCenter from "./finance_department/components/support/HelpCenter";
-import ContactSupport from "./finance_department/components/support/ContactSupport";
-import ViewProfile from "./finance_department/components/profile/ViewProfile";
-import EditProfile from "./finance_department/components/profile/EditProfile";
-import Profile from "./finance_department/components/profile/Profile";
 
 function App() {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -119,94 +107,67 @@ function App() {
           <Route index element={<RedirectToDashboard />} />
 
           {/* Routes for Project Department */}
-          <Route path="/project/dashboard" element={<DashboardScreen />} />
-          <Route path="/projects/*" element={<Projects />} >
-            <Route path="all" element={<AllProjects />} />
-            <Route path="add" element={<AddProject />} />
-            <Route path="update/:id" element={<UpdateProject />} />
-            <Route path=":id" element={<ProjectDetail />} />
-            <Route path="reports" element={<ProjectReports />} />
-          </Route>
-          <Route path="/personnel/*" element={<Personnel />} >
-            <Route path="all" element={<AllPersonnel />} />
-            <Route path="add" element={<AddPersonnel />} />
-            <Route path="assignments" element={<Assignments />} />
-            <Route path="details/:id" element={<PersonnelDetails />} />
-            <Route path="update/:id" element={<UpdatePersonnel />} />
-          </Route>
-          <Route path="/clients/*" element={<Clients />} >
-            <Route path="all" element={<Clients />} />
-            <Route path="add" element={<AddClient />} />
-            <Route path="details/:id" element={<ClientDetail />} />
-            <Route path="interactions" element={<ClientInteractions />} />
+          <Route path="project/*" element={<ProtectedRoute element={<BaseLayout />} />}>
+            <Route path="dashboard" element={<DashboardScreen />} />
+            <Route path="projects/*" element={<Projects />}>
+              <Route path="all" element={<AllProjects />} />
+              <Route path="add" element={<AddProject />} />
+              <Route path="update/:id" element={<UpdateProject />} />
+              <Route path=":id" element={<ProjectDetail />} />
+              <Route path="reports" element={<ProjectReports />} />
+            </Route>
+            <Route path="personnel/*" element={<Personnel />}>
+              <Route path="all" element={<AllPersonnel />} />
+              <Route path="add" element={<AddPersonnel />} />
+              <Route path="assignments" element={<Assignments />} />
+              <Route path="details/:id" element={<PersonnelDetails />} />
+              <Route path="update/:id" element={<UpdatePersonnel />} />
+            </Route>
+            <Route path="clients/*" element={<Clients />}>
+              <Route path="all" element={<Clients />} />
+              <Route path="add" element={<AddClient />} />
+              <Route path="details/:id" element={<ClientDetail />} />
+              <Route path="interactions" element={<ClientInteractions />} />
+            </Route>
           </Route>
 
           {/* Routes for Finance Department */}
-          <Route path="/finance/*" element={<ProtectedRoute element={<FinanceBaseLayout />} />}>
+          <Route path="finance/*" element={<ProtectedRoute element={<FinanceBaseLayout />} />}>
             <Route path="dashboard" element={<FinanceDashboard />} />
-
-            {/* Accounts */}
-            <Route path="accounts" element={<Accounts />} >
+            <Route path="accounts/*" element={<Accounts />}>
               <Route path="payable" element={<AccountsPayable />} />
               <Route path="receivable" element={<AccountsReceivable />} />
             </Route>
-
-            {/* Budgets */}
-            <Route path="budgets" element={<Budgets />} >
+            <Route path="budgets/*" element={<Budgets />}>
               <Route path="current" element={<CurrentBudget />} />
               <Route path="requests" element={<BudgetRequests />} />
             </Route>
-
-            {/* Reports */}
-            <Route path="reports" element={<Reports />} >
+            <Route path="reports/*" element={<Reports />}>
               <Route path="financial" element={<FinancialReports />} />
               <Route path="expense" element={<ExpenseReports />} />
               <Route path="revenue" element={<RevenueAnalysis />} />
             </Route>
-
-            {/* Compliance */}
-            <Route path="compliance" element={<Compliance />} >
-              <Route path="audit" element={<Audit />} />
-              <Route path="overview" element={<ComplianceOverview />} />
-            </Route>
-
-            {/* Analytics */}
-            <Route path="analytics" element={<Analytics />} >
-              <Route path="kpis" element={<KPIs />} />
-              <Route path="trends" element={<Trends />} />
-            </Route>
-
-            {/* Settings */}
-            <Route path="settings" element={<Settings />} >
-              <Route path="financial" element={<FinancialSettings />} />
-              <Route path="user-management" element={<UserManagement />} />
-              <Route path="integrations" element={<Integrations />} />
-            </Route>
-
-            {/* Support */}
-            <Route path="support" element={<Support />} >
-              <Route path="help-center" element={<HelpCenter />} />
-              <Route path="contact" element={<ContactSupport />} />
-            </Route>
-
-            {/* Profile */}
-            <Route path="profile" element={<Profile />} >
-              <Route path="view" element={<ViewProfile />} />
-              <Route path="edit" element={<EditProfile />} />
-            </Route>
           </Route>
 
           {/* Routes for HR Department */}
-          <Route path="/hr/dashboard" element={<HRDashboard />} />
+          <Route path="hr/*" element={<ProtectedRoute element={<HRBaseLayout />} />}>
+            <Route path="dashboard" element={<HRDashboard />} />
+          </Route>
 
           {/* Routes for Sales Department */}
-          <Route path="/sales/*" element={<ProtectedRoute element={<SalesDashboard />} />} />
+          <Route path="sales/*" element={<ProtectedRoute element={<SalesBaseLayout />} />}>
+            <Route path="dashboard" element={<SalesDashboard />} />
+          </Route>
 
           {/* Routes for Operations Department */}
-          <Route path="/operation/dashboard" element={<OperationDashboard />} />
+          <Route path="operation/*" element={<ProtectedRoute element={<OperationBaseLayout />} />}>
+            <Route path="dashboard" element={<OperationDashboard />} />
+          </Route>
 
           {/* Routes for Technical Department */}
-          <Route path="/technical/dashboard" element={<TechnicalDashboard />} />
+          <Route path="technical/*" element={<ProtectedRoute element={<TechnicalBaseLayout />} />}>
+            <Route path="dashboard" element={<TechnicalDashboard />} />
+          </Route>
 
           <Route path="/unauthorized" element={<UnauthorizedPage />} />
           <Route path="*" element={<PageNotFound />} />

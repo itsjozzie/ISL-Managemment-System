@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import FinanceSidebar from "../components/sidebar/FinanceSidebar";
+import { FinanceSidebar } from "../components";
 
 const FinanceBaseLayout = () => {
   return (

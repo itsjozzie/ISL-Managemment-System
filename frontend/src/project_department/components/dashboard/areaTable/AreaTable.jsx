@@ -5,7 +5,7 @@ const TABLE_HEADS = [
   "Products",
   "Order ID",
   "Date",
-  "Customer name",
+  "Customer Name",
   "Status",
   "Amount",
   "Action",
@@ -14,18 +14,18 @@ const TABLE_HEADS = [
 const TABLE_DATA = [
   {
     id: 100,
-    name: "Iphone 13 Pro",
+    name: "iPhone 13 Pro",
     order_id: 11232,
-    date: "Jun 29,2022",
+    date: "Jun 29, 2022",
     customer: "Afaq Karim",
     status: "delivered",
     amount: 400,
   },
   {
     id: 101,
-    name: "Macbook Pro",
-    order_id: 11232,
-    date: "Jun 29,2022",
+    name: "MacBook Pro",
+    order_id: 11233,
+    date: "Jun 29, 2022",
     customer: "Afaq Karim",
     status: "pending",
     amount: 288,
@@ -33,8 +33,8 @@ const TABLE_DATA = [
   {
     id: 102,
     name: "Apple Watch",
-    order_id: 11232,
-    date: "Jun 29,2022",
+    order_id: 11234,
+    date: "Jun 29, 2022",
     customer: "Afaq Karim",
     status: "canceled",
     amount: 500,
@@ -42,8 +42,8 @@ const TABLE_DATA = [
   {
     id: 103,
     name: "Microsoft Book",
-    order_id: 11232,
-    date: "Jun 29,2022",
+    order_id: 11235,
+    date: "Jun 29, 2022",
     customer: "Afaq Karim",
     status: "delivered",
     amount: 100,
@@ -51,17 +51,17 @@ const TABLE_DATA = [
   {
     id: 104,
     name: "Apple Pen",
-    order_id: 11232,
-    date: "Jun 29,2022",
+    order_id: 11236,
+    date: "Jun 29, 2022",
     customer: "Afaq Karim",
     status: "delivered",
     amount: 60,
   },
   {
     id: 105,
-    name: "Airpods",
-    order_id: 11232,
-    date: "Jun 29,2022",
+    name: "AirPods",
+    order_id: 11237,
+    date: "Jun 29, 2022",
     customer: "Afaq Karim",
     status: "delivered",
     amount: 80,
@@ -78,13 +78,13 @@ const AreaTable = () => {
         <table>
           <thead>
             <tr>
-              {TABLE_HEADS?.map((th, index) => (
+              {TABLE_HEADS.map((th, index) => (
                 <th key={index}>{th}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {TABLE_DATA?.map((dataItem) => {
+            {TABLE_DATA.map((dataItem) => {
               return (
                 <tr key={dataItem.id}>
                   <td>{dataItem.name}</td>

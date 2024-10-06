@@ -25,8 +25,8 @@ function UpdateProject() {
         setProject({
           name: data.name,
           description: data.description,
-          start_date: data.start_date.split('T')[0], 
-          end_date: data.end_date.split('T')[0],     
+          start_date: data.start_date.split('T')[0],
+          end_date: data.end_date.split('T')[0],
           status: data.status,
           client_id: data.client_id,
         });
@@ -46,12 +46,7 @@ function UpdateProject() {
   const handleUpdateProject = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token'); // or wherever you store the token
-      await axios.put(`${API_BASE_URL}/projects/${id}`, project, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      });
+      await axios.put(`${API_BASE_URL}/projects/${id}`, project);
       alert('Project updated successfully');
       navigate(`/projects/all`);
     } catch (error) {

@@ -1,107 +1,88 @@
 .content-area-top {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
+  justify-content: space-between; // Space items between left and right
+  gap: 16px; // Consistent spacing between items
+  flex-wrap: wrap; // Allow items to wrap on smaller screens
+  padding: 16px; // Added padding for better spacing
 
   .area-top-title {
-    color: var(--text-color-inverted);
+    color: var(--text-color-inverted); // Title color
+    font-size: 1.75rem; // Increased font size for better visibility
+    font-weight: bold; // Bold title for prominence
   }
 
-  .area-top-l {
-    display: flex;
-    align-items: center;
-    column-gap: 6px;
+  .area-top-left {
+    display: flex; // Flexbox for left area
+    align-items: center; // Center align items vertically
+    gap: 12px; // Increased gap for better spacing
+
+    .icon {
+      font-size: 1.75rem; // Increased icon size for better visibility
+      color: var(--primary-color); // Icon color
+    }
   }
 
   .sidebar-open-btn {
-    display: inline-flex;
-    align-items: center;
-    display: none;
-    margin-bottom: -1px;
-    color: var(--text-color-inverted);
+    display: none; // Initially hidden
+    align-items: center; // Center align button content
+    margin-bottom: -1px; // Adjust to align with other elements
+    color: var(--text-color-inverted); // Button text color
+    background: transparent; // Transparent background
+    border: none; // No border
+    cursor: pointer; // Pointer cursor on hover
+    font-size: 1.25rem; // Increased button font size
 
     @media (max-width: 768px) {
-      display: inline-flex;
+      display: inline-flex; // Show button on smaller screens
     }
   }
 
-  .date-range-wrapper {
-    display: inline-block;
-    box-shadow: var(--light-shadow1);
+  .area-top-right {
+    position: relative; // Relative positioning for dropdown
 
-    .rdrDateDisplay {
-      margin: 0;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      border-radius: 5px;
-      overflow: hidden;
-    }
+    .date-range-input {
+      padding: 12px 16px; // Increased padding for comfort
+      border-radius: 8px; // Consistent border-radius
+      background-color: var(--secondary-color); // Background color
+      color: var(--text-color-inverted); // Text color
+      cursor: pointer; // Pointer cursor
+      box-shadow: var(--light-shadow1); // Shadow for depth
+      transition: box-shadow 0.3s ease; // Transition for hover effect
 
-    .rdrDateRangeWrapper {
-      position: relative;
-    }
-
-    .rdrMonthAndYearWrapper {
-      position: absolute;
-      top: 100%;
-      width: 100%;
-      background-color: var(--light-color);
-      padding-top: 0;
-      height: 40px;
-      z-index: 1;
-    }
-
-    .rdrMonth {
-      padding: 0;
-      z-index: 1;
-    }
-
-    .rdrWeekDays {
-      position: absolute;
-      top: calc(100% + 40px);
-      left: 0;
-      width: 100%;
-      background-color: var(--light-color);
-      height: 32px;
-      z-index: 1;
-    }
-
-    .rdrDays {
-      position: absolute;
-      top: calc(100% + 40px + 32px);
-      left: 0;
-      width: 100%;
-      background-color: var(--light-color);
-      z-index: 1;
-    }
-
-    &.hide-date-range {
-      .rdrMonthAndYearWrapper {
-        display: none;
+      &:hover {
+        box-shadow: var(--light-shadow2); // Subtle hover effect
       }
-      .rdrMonth {
-        padding: 0;
+    }
+
+    .date-range-wrapper {
+      position: absolute; // Position dropdown absolutely
+      top: 120%; // Adjusted position for dropdown
+      right: 0; // Align to the right
+      z-index: 100; // Ensure it appears above other content
+      background: var(--secondary-color); // Background color
+      box-shadow: var(--light-shadow1); // Shadow for depth
+      border-radius: 8px; // Rounded corners
+      overflow: hidden; // Hide overflow
+
+      .rdrDateDisplayWrapper {
+        background-color: var(--secondary-color); // Consistent background
+        border-color: var(--secondary-color); // Border color
+        outline: var(--secondary-color); // Outline color
+
+        * {
+          background-color: var(--secondary-color); // Inner elements background
+          border-color: var(--secondary-color); // Inner elements border
+          outline: var(--secondary-color); // Inner elements outline
+          box-shadow: none; // No shadow for inner elements
+          color: var(--base-text-color); // Text color for inner elements
+        }
       }
+
+      .rdrMonthAndYearWrapper,
       .rdrWeekDays,
       .rdrDays {
-        display: none;
-      }
-    }
-
-    .rdrDateDisplayWrapper {
-      background-color: var(--secondary-color);
-      border-color: var(--secondary-color);
-      outline: var(--secondary-color);
-
-      * {
-        background-color: var(--secondary-color);
-        border-color: var(--secondary-color);
-        outline: var(--secondary-color);
-        box-shadow: none;
-        color: var(--base-text-color);
+        background-color: var(--light-color); // Background color for calendar elements
       }
     }
   }

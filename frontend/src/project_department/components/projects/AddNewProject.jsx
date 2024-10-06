@@ -12,7 +12,7 @@ function AddNewProject() {
   const [endDate, setEndDate] = useState('');
   const [status, setStatus] = useState('');
   const [clientId, setClientId] = useState('');
-  const navigate = useNavigate(); // Hook for programmatic navigation
+  const navigate = useNavigate();
 
   const handleAddProject = async (e) => {
     e.preventDefault();
@@ -21,32 +21,23 @@ function AddNewProject() {
     const formattedEndDate = new Date(endDate).toISOString().split('T')[0];
 
     try {
-      const token = localStorage.getItem('token'); // or wherever you store the token
       const response = await axios.post(`${API_BASE_URL}/projects`, {
         name,
         description,
         start_date: formattedStartDate,
         end_date: formattedEndDate,
         status,
-        client_id: clientId
-      }, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
+        client_id: clientId,
       });
+
       alert(response.data.message);
-      
-      // Redirect to the list of projects after successful addition
       navigate('/projects/all');
-      
-      // Clear form fields
       setName('');
       setDescription('');
       setStartDate('');
       setEndDate('');
       setStatus('');
       setClientId('');
-      
     } catch (error) {
       alert(error.response ? error.response.data.message : 'An error occurred');
     }
@@ -62,7 +53,7 @@ function AddNewProject() {
         </div>
         <div className="form-group">
           <label>Description:</label>
-          <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+          <textarea value={description} onChange={(e) => setDescription(e.target.value)} required />
         </div>
         <div className="form-group">
           <label>Start Date:</label>

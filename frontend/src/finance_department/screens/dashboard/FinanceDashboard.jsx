@@ -3,7 +3,7 @@ import KeyFinancialMetrics from "../../components/dashboard/KeyFinancialMetrics/
 import RecentTransactions from "../../components/dashboard/RecentTransactions/RecentTransactions";
 import OutstandingInvoices from "../../components/dashboard/OutstandingInvoices/OutstandingInvoices";
 import FinancialDeadlines from "../../components/dashboard/FinancialDeadlines/FinancialDeadlines";
-import './Dashboard.scss';
+import './FinanceDashboard.scss';
 
 const FinanceDashboard = () => {
   return (

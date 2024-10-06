@@ -2,14 +2,13 @@ import { MdOutlineMenu } from "react-icons/md";
 import "./AreaTop.scss";
 import { useContext, useEffect, useRef, useState } from "react";
 import { SidebarContext } from "../../../context/SidebarContext";
-import "react-date-range/dist/styles.css"; // main style file
-import "react-date-range/dist/theme/default.css"; // theme css file
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 import { addDays } from "date-fns";
 import { DateRange } from "react-date-range";
 
 const AreaTop = () => {
   const { openSidebar } = useContext(SidebarContext);
-
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -17,12 +16,11 @@ const AreaTop = () => {
       key: "selection",
     },
   ]);
-
   const [showDatePicker, setShowDatePicker] = useState(false);
   const dateRangeRef = useRef(null);
 
   const handleInputClick = () => {
-    setShowDatePicker(true);
+    setShowDatePicker((prev) => !prev);
   };
 
   const handleClickOutside = (event) => {
@@ -40,7 +38,7 @@ const AreaTop = () => {
 
   return (
     <section className="content-area-top">
-      <div className="area-top-l">
+      <div className="area-top-left">
         <button
           className="sidebar-open-btn"
           type="button"
@@ -50,22 +48,21 @@ const AreaTop = () => {
         </button>
         <h2 className="area-top-title">Dashboard</h2>
       </div>
-      <div className="area-top-r">
-        <div
-          ref={dateRangeRef}
-          className={`date-range-wrapper ${
-            !showDatePicker ? "hide-date-range" : ""
-          }`}
-          onClick={handleInputClick}
-        >
-          <DateRange
-            editableDateInputs={true}
-            onChange={(item) => setState([item.selection])}
-            moveRangeOnFirstSelection={false}
-            ranges={state}
-            showMonthAndYearPickers={false}
-          />
+      <div className="area-top-right">
+        <div className="date-range-input" onClick={handleInputClick}>
+          {`${state[0].startDate.toLocaleDateString()} - ${state[0].endDate.toLocaleDateString()}`}
         </div>
+        {showDatePicker && (
+          <div ref={dateRangeRef} className="date-range-wrapper">
+            <DateRange
+              editableDateInputs={true}
+              onChange={(item) => setState([item.selection])}
+              moveRangeOnFirstSelection={false}
+              ranges={state}
+              showMonthAndYearPickers={false}
+            />
+          </div>
+        )}
       </div>
     </section>
   );

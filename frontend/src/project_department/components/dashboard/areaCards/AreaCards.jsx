@@ -8,7 +8,7 @@ const AreaCards = () => {
         colors={["#e4e8ef", "#475be8"]}
         percentFillValue={80}
         cardInfo={{
-          title: "Todays Sales",
+          title: "Today's Sales",
           value: "Tzs 200,000/=",
           text: "We have sold 123 items.",
         }}
@@ -17,8 +17,8 @@ const AreaCards = () => {
         colors={["#e4e8ef", "#4ce13f"]}
         percentFillValue={50}
         cardInfo={{
-          title: "Todays Revenue",
-          value: "Tzs 500,00/=",
+          title: "Today's Revenue",
+          value: "Tzs 500,000/=", // Fixed typo in value
           text: "Available to payout",
         }}
       />

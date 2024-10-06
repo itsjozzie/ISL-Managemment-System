@@ -1,50 +1,54 @@
 .user-profile {
-  text-align: left;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  padding: 20px; // Adjusted padding for a more balanced look
+  background-color: var(--light-bg-color); // Ensured the background color matches the theme
+  border-radius: 12px; // Increased border-radius for a softer appearance
+  box-shadow: var(--light-shadow1); // Applied a subtle shadow for depth
+  gap: 30px; // Increased gap for better spacing between elements
 
-  h2 {
-    margin-bottom: 15px;
+  @media (max-width: 768px) {
+    flex-direction: column; // Stack elements on small screens
+    text-align: center; // Center align text on small screens
   }
 
-  .sidebar-logo {
-    width: 10rem;
-    height: 10rem;
-    -o-border-radius: 50%;
+  .profile-image-wrapper {
+    flex-shrink: 0;
+    width: 100px; // Fixed width for profile image
+    height: 100px; // Fixed height for profile image
+    border-radius: 50%; // Circular shape
+    overflow: hidden; // Hide overflow
+    background-color: var(--light-color); // Background color for placeholder
+    box-shadow: var(--light-shadow1); // Added shadow for depth
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 1rem auto;
-    overflow: hidden;
-    background-color: #f0f0f0;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    border-radius: 50%;
-}
-  
-  
-  .sidebar-logo img {
-    width: 100%;
-    height: auto; 
+
+    img {
+      width: 100%; // Ensure image fits container
+      height: auto; // Maintain aspect ratio
+      object-fit: cover; // Cover the container
+      border-radius: 50%; // Keep image circular
+      transition: transform 0.3s ease; // Smooth transition for hover effect
+
+      &:hover {
+        transform: scale(1.1); // Increased zoom effect on hover for better visibility
+      }
+    }
   }
 
   .profile-info {
-    margin-bottom: 20px;
-  }
+    .profile-role {
+      font-size: 1.1rem; // Slightly larger font size for readability
+      font-weight: 600; // Keep the font weight bold
+      color: var(--secondary-text-color); // Ensure color matches theme
+      margin-bottom: 6px; // Adjusted margin for better compactness
+    }
 
-  button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #0056b3;
+    .profile-name {
+      font-size: 1.5rem; // Increased font size for prominence
+      font-weight: 700; // Bold font weight for emphasis
+      color: var(--primary-text-color); // Primary color for contrast
     }
   }
 }

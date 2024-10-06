@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 
 const AreaTableAction = () => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const handleDropdown = () => {
-    setShowDropdown(!showDropdown);
-  };
-
   const dropdownRef = useRef(null);
+
+  const handleDropdown = () => {
+    setShowDropdown((prev) => !prev);
+  };
 
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -19,7 +19,7 @@ const AreaTableAction = () => {
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.addEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -31,28 +31,28 @@ const AreaTableAction = () => {
         onClick={handleDropdown}
       >
         <HiDotsHorizontal size={18} />
-        {showDropdown && (
-          <div className="action-dropdown-menu" ref={dropdownRef}>
-            <ul className="dropdown-menu-list">
-              <li className="dropdown-menu-item">
-                <Link to="/view" className="dropdown-menu-link">
-                  View
-                </Link>
-              </li>
-              <li className="dropdown-menu-item">
-                <Link to="/view" className="dropdown-menu-link">
-                  Edit
-                </Link>
-              </li>
-              <li className="dropdown-menu-item">
-                <Link to="/view" className="dropdown-menu-link">
-                  Delete
-                </Link>
-              </li>
-            </ul>
-          </div>
-        )}
       </button>
+      {showDropdown && (
+        <div className="action-dropdown-menu" ref={dropdownRef}>
+          <ul className="dropdown-menu-list">
+            <li className="dropdown-menu-item">
+              <Link to="/view" className="dropdown-menu-link">
+                View
+              </Link>
+            </li>
+            <li className="dropdown-menu-item">
+              <Link to="/edit" className="dropdown-menu-link">
+                Edit
+              </Link>
+            </li>
+            <li className="dropdown-menu-item">
+              <Link to="/delete" className="dropdown-menu-link">
+                Delete
+              </Link>
+            </li>
+          </ul>
+        </div>
+      )}
     </>
   );
 };

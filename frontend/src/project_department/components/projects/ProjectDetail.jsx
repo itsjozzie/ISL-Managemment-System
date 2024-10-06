@@ -18,28 +18,23 @@ function ProjectDetail() {
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const token = localStorage.getItem('token'); // Retrieve token from localStorage
-        const response = await axios.get(`http://localhost:5000/api/projects/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}` // Include the token in the Authorization header
-          }
-        });
+        const response = await axios.get(`http://localhost:5000/api/projects/${id}`);
         setProject(response.data);
       } catch (error) {
         console.error('Error fetching project details', error);
-        if (error.response && error.response.status === 401) {
-          navigate('/login'); // Redirect to login page if unauthorized
-        }
+        // Optionally handle the error or show a message to the user
       }
     };
     fetchProject();
-  }, [id, navigate]);
+  }, [id]);
 
   const handleUpdateClick = () => {
     navigate(`/projects/update/${id}`);
   };
 
   const handlePrintClick = () => {
+    if (!project) return;
+
     const doc = new Document({
       sections: [
         {

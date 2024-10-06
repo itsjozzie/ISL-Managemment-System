@@ -23,11 +23,7 @@ const Sidebar = () => {
   const [isClientsOpen, setIsClientsOpen] = useState(false);
 
   const handleClickOutside = (event) => {
-    if (
-      navbarRef.current &&
-      !navbarRef.current.contains(event.target) &&
-      event.target.className !== "sidebar-open-btn"
-    ) {
+    if (navbarRef.current && !navbarRef.current.contains(event.target) && event.target.className !== "sidebar-open-btn") {
       closeSidebar();
     }
   };
@@ -44,10 +40,7 @@ const Sidebar = () => {
   };
 
   return (
-    <nav
-      className={`sidebar ${isSidebarOpen ? "sidebar-show" : ""}`}
-      ref={navbarRef}
-    >
+    <nav className={`sidebar ${isSidebarOpen ? "sidebar-show" : ""}`} ref={navbarRef}>
       <div className="sidebar-top">
         <div className="sidebar-brand">
           <img src={logo} alt="Logo" className="sidebar-logo" />
@@ -60,7 +53,7 @@ const Sidebar = () => {
         <div className="sidebar-menu">
           <ul className="menu-list">
             <li className="menu-item">
-              <Link to="/" className="menu-link active">
+              <Link to="/project/dashboard" className="menu-link active">
                 <span className="menu-link-icon">
                   <MdOutlineGridView size={18} />
                 </span>
@@ -80,13 +73,13 @@ const Sidebar = () => {
               {isProjectsOpen && (
                 <ul className="sub-menu">
                   <li>
-                    <Link to="/projects/all">All Projects</Link>
+                    <Link to="/project/projects/all">All Projects</Link>
                   </li>
                   <li>
-                    <Link to="/projects/add">Add New Project</Link>
+                    <Link to="/project/projects/add">Add New Project</Link>
                   </li>
                   <li>
-                    <Link to="/projects/reports">Project Reports</Link>
+                    <Link to="/project/projects/reports">Project Reports</Link>
                   </li>
                 </ul>
               )}
@@ -104,13 +97,13 @@ const Sidebar = () => {
               {isPersonnelOpen && (
                 <ul className="sub-menu">
                   <li>
-                    <Link to="/personnel/all">All Personnel</Link>
+                    <Link to="/project/personnel/all">All Personnel</Link>
                   </li>
                   <li>
-                    <Link to="/personnel/add">Add New Personnel</Link>
+                    <Link to="/project/personnel/add">Add New Personnel</Link>
                   </li>
                   <li>
-                    <Link to="/personnel/assignments">Assignments</Link>
+                    <Link to="/project/personnel/assignments">Assignments</Link>
                   </li>
                 </ul>
               )}
@@ -128,19 +121,19 @@ const Sidebar = () => {
               {isClientsOpen && (
                 <ul className="sub-menu">
                   <li>
-                    <Link to="/clients/all">All Clients</Link>
+                    <Link to="/project/clients/all">All Clients</Link>
                   </li>
                   <li>
-                    <Link to="/clients/add">Add New Client</Link>
+                    <Link to="/project/clients/add">Add New Client</Link>
                   </li>
                   <li>
-                    <Link to="/clients/interactions">Client Interactions</Link>
+                    <Link to="/project/clients/interactions">Client Interactions</Link>
                   </li>
                 </ul>
               )}
             </li>
             <li className="menu-item">
-              <Link to="/progress" className="menu-link">
+              <Link to="/project/progress" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlineTask size={20} />
                 </span>
@@ -148,7 +141,7 @@ const Sidebar = () => {
               </Link>
             </li>
             <li className="menu-item">
-              <Link to="/reports" className="menu-link">
+              <Link to="/project/reports" className="menu-link">
                 <span className="menu-link-icon">
                   <MdOutlineAssessment size={20} />
                 </span>
