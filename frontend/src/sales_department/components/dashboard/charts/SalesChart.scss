@@ -1,0 +1,24 @@
+.sales-chart {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    h2 {
+      font-size: 24px;
+      color: #34495e;
+      margin-bottom: 15px;
+    }
+  
+    // Responsive styles
+    @media (max-width: 768px) {
+      padding: 15px;
+      h2 {
+        font-size: 20px;
+      }
+    }
+  }
+  

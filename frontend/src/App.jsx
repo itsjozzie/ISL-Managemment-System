@@ -62,6 +62,18 @@ import FinancialReports from "./finance_department/components/reports/FinancialR
 import ExpenseReports from "./finance_department/components/reports/ExpenseReports";
 import RevenueAnalysis from "./finance_department/components/reports/RevenueAnalysis";
 
+// Sales department components (added)
+import SalesAccounts from "./sales_department/components/accounts/Accounts";
+import SalesAccountsPayable from "./sales_department/components/accounts/AccountsPayable";
+import SalesAccountsReceivable from "./sales_department/components/accounts/AccountsReceivable";
+import SalesBudgets from "./sales_department/components/budgets/Budgets";
+import SalesCurrentBudget from "./sales_department/components/budgets/CurrentBudget";
+import SalesBudgetRequests from "./sales_department/components/budgets/BudgetRequests";
+import SalesReports from "./sales_department/components/reports/Reports";
+import SalesFinancialReports from "./sales_department/components/reports/FinancialReports";
+import SalesExpenseReports from "./sales_department/components/reports/ExpenseReports";
+import SalesRevenueAnalysis from "./sales_department/components/reports/RevenueAnalysis";
+
 function App() {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const isAuthenticated = !!localStorage.getItem('token');
@@ -109,21 +121,21 @@ function App() {
           {/* Routes for Project Department */}
           <Route path="project/*" element={<ProtectedRoute element={<BaseLayout />} />}>
             <Route path="dashboard" element={<DashboardScreen />} />
-            <Route path="projects/*" element={<Projects />}>
+            <Route path="projects/*" element={<Projects />} >
               <Route path="all" element={<AllProjects />} />
               <Route path="add" element={<AddProject />} />
               <Route path="update/:id" element={<UpdateProject />} />
               <Route path=":id" element={<ProjectDetail />} />
               <Route path="reports" element={<ProjectReports />} />
             </Route>
-            <Route path="personnel/*" element={<Personnel />}>
+            <Route path="personnel/*" element={<Personnel />} >
               <Route path="all" element={<AllPersonnel />} />
               <Route path="add" element={<AddPersonnel />} />
               <Route path="assignments" element={<Assignments />} />
               <Route path="details/:id" element={<PersonnelDetails />} />
               <Route path="update/:id" element={<UpdatePersonnel />} />
             </Route>
-            <Route path="clients/*" element={<Clients />}>
+            <Route path="clients/*" element={<Clients />} >
               <Route path="all" element={<Clients />} />
               <Route path="add" element={<AddClient />} />
               <Route path="details/:id" element={<ClientDetail />} />
@@ -134,15 +146,15 @@ function App() {
           {/* Routes for Finance Department */}
           <Route path="finance/*" element={<ProtectedRoute element={<FinanceBaseLayout />} />}>
             <Route path="dashboard" element={<FinanceDashboard />} />
-            <Route path="accounts/*" element={<Accounts />}>
+            <Route path="accounts/*" element={<Accounts />} >
               <Route path="payable" element={<AccountsPayable />} />
               <Route path="receivable" element={<AccountsReceivable />} />
             </Route>
-            <Route path="budgets/*" element={<Budgets />}>
+            <Route path="budgets/*" element={<Budgets />} >
               <Route path="current" element={<CurrentBudget />} />
               <Route path="requests" element={<BudgetRequests />} />
             </Route>
-            <Route path="reports/*" element={<Reports />}>
+            <Route path="reports/*" element={<Reports />} >
               <Route path="financial" element={<FinancialReports />} />
               <Route path="expense" element={<ExpenseReports />} />
               <Route path="revenue" element={<RevenueAnalysis />} />
@@ -157,6 +169,19 @@ function App() {
           {/* Routes for Sales Department */}
           <Route path="sales/*" element={<ProtectedRoute element={<SalesBaseLayout />} />}>
             <Route path="dashboard" element={<SalesDashboard />} />
+            <Route path="accounts/*" element={<SalesAccounts />} >
+              <Route path="payable" element={<SalesAccountsPayable />} />
+              <Route path="receivable" element={<SalesAccountsReceivable />} />
+            </Route>
+            <Route path="budgets/*" element={<SalesBudgets />} >
+              <Route path="current" element={<SalesCurrentBudget />} />
+              <Route path="requests" element={<SalesBudgetRequests />} />
+            </Route>
+            <Route path="reports/*" element={<SalesReports />} >
+              <Route path="financial" element={<SalesFinancialReports />} />
+              <Route path="expense" element={<SalesExpenseReports />} />
+              <Route path="revenue" element={<SalesRevenueAnalysis />} />
+            </Route>
           </Route>
 
           {/* Routes for Operations Department */}

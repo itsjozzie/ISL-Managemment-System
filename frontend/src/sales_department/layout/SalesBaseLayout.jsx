@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import SalesSidebar from "../components/sidebar/SalesSidebar";
+import { SalesSidebar } from "../components";
 
 const SalesBaseLayout = () => {
   return (
