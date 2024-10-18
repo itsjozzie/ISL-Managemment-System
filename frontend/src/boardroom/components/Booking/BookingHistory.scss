@@ -1,0 +1,72 @@
+.booking-history {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--secondary-color);
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+
+    h4 {
+        color: var(--primary-color);
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            font-weight: bold;
+        }
+
+        tr {
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: var(--primary-color-lightened);
+            }
+        }
+    }
+
+    .submenu-item {
+        color: var(--base-text-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: var(--light-color);
+        }
+    }
+
+    .status-dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 8px;
+
+        &.completed {
+            background-color: green;
+        }
+
+        &.in-progress {
+            background-color: orange;
+        }
+
+        &.canceled {
+            background-color: red;
+        }
+    }
+}

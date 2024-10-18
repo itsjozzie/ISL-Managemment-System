@@ -1,0 +1,69 @@
+.booking-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+
+  h1 {
+    color: var(--primary-color); // Using CSS variable for primary color
+    font-size: 2rem;
+    margin-bottom: 20px; // Margin for better spacing
+    text-align: center; // Centering the heading for a polished look
+  }
+
+  .booking-form {
+    background-color: var(--secondary-color); // Using CSS variable for secondary color
+    border: 1px solid var(--primary-color-darkened); // Using CSS variable for border
+    padding: 20px;
+    border-radius: 8px; // Modern border-radius for smooth edges
+    width: 100%;
+    max-width: 600px; // Maximum width for the form
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); // Subtle shadow for a modern feel
+    transition: box-shadow 0.3s ease; // Smooth transition for hover effect
+
+    @media (max-width: 600px) {
+      width: 90%; // Responsive width on smaller screens
+    }
+
+    &:hover {
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2); // Slightly larger shadow on hover
+    }
+
+    label {
+      color: var(--base-text-color); // Using CSS variable for text color
+      font-weight: 600; // Bold labels for better readability
+      margin-top: 10px; // Added top margin for spacing
+    }
+
+    input, button {
+      width: 100%;
+      margin-top: 10px; // Space between inputs and buttons
+      padding: 10px;
+      border: 1px solid var(--primary-color); // Using CSS variable for border
+      border-radius: 4px; // Rounded corners for inputs and buttons
+      font-size: 1rem; // Standard font size for readability
+      transition: border-color 0.3s ease; // Transition for border color on focus
+
+      &:focus {
+        border-color: var(--primary-color-darkened); // Change border color on focus
+        outline: none; // Remove default outline
+      }
+    }
+
+    button {
+      background-color: var(--primary-color); // Using CSS variable for button background
+      color: var(--light-color); // Using CSS variable for button text color
+      font-weight: bold; // Bold text for buttons
+      cursor: pointer;
+      border: none; // Remove default border
+
+      &:hover {
+        background-color: var(--primary-color-darkened); // Darken button on hover
+      }
+
+      &:active {
+        transform: scale(0.98); // Slightly shrink button on click for feedback
+      }
+    }
+  }
+}

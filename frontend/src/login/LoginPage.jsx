@@ -65,8 +65,11 @@ function LoginPage() {
         case 'technical':
           navigate("/technical/dashboard");
           break;
+        case 'admin':
+          navigate("/admin/dashboard");
+          break;
         default:
-          navigate("/"); // Fallback for any undefined roles
+          navigate("/"); 
           break;
       }
     } catch (error) {

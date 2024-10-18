@@ -87,6 +87,7 @@ function RegisterPage() {
               <option value="sales">Sales</option>
               <option value="operation">Operations</option>
               <option value="technical">Technical</option>
+              <option value="admin">Admin</option>
             </select>
           </div>
           <button type="submit">Register</button>

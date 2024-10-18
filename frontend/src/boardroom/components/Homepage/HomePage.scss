@@ -1,0 +1,30 @@
+.home-page {
+  display: flex;
+  justify-content: center; // Centers components in the container
+  padding: 50px; // Added padding to maintain space
+  margin-left: 260px; // Ensures space for the sidebar
+
+  .dashboard-components {
+    display: flex;
+    flex-direction: column; // Stacks components vertically
+    align-items: center; // Centers components horizontally
+    gap: 20px; // Space between components
+
+    @media (min-width: 600px) {
+      flex-direction: row; // Stacks components side by side on wider screens
+      justify-content: space-around; // Distributes space evenly
+    }
+
+    // You can add specific styles for individual components if necessary
+    > div {
+      background-color: var(--light-bg-color); // Background color for the components
+      border-radius: 8px; // Rounded corners
+      padding: 20px; // Padding for components
+      width: 100%; // Full width on small screens
+
+      @media (min-width: 600px) {
+        width: 45%; // Width for larger screens
+      }
+    }
+  }
+}

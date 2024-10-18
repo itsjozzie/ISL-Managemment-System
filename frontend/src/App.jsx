@@ -13,7 +13,7 @@ import SalesBaseLayout from "./sales_department/layout/SalesBaseLayout";
 import HRBaseLayout from "./HR_department/layout/HRBaseLayout";
 import OperationBaseLayout from "./operation_department/layout/OperationBaseLayout";
 import TechnicalBaseLayout from "./technical_department/layout/TechnicalBaseLayout";
-
+import BoardRoomBaseLayout from "./boardroom/layout/BoardRoomBaseLayout";
 import PageNotFound from "./project_department/screens/error/PageNotFound";
 import UnauthorizedPage from "./project_department/screens/error/UnauthorizedPage";
 import DashboardScreen from "./project_department/screens/dashboard/DashboardScreen";
@@ -22,6 +22,7 @@ import HRDashboard from "./HR_department/screens/dashboard/HRDashboard";
 import SalesDashboard from "./sales_department/screens/dashboard/SalesDashboard";
 import OperationDashboard from "./operation_department/screens/dashboard/DashboardScreen";
 import TechnicalDashboard from "./technical_department/screens/dashboard/DashboardScreen";
+import BoardRoomDashboard from "./boardroom/screens/dashboard/BoardRoomDashboard";
 
 // Project department components
 import Projects from "./project_department/components/projects/Projects";
@@ -74,6 +75,11 @@ import SalesFinancialReports from "./sales_department/components/reports/Financi
 import SalesExpenseReports from "./sales_department/components/reports/ExpenseReports";
 import SalesRevenueAnalysis from "./sales_department/components/reports/RevenueAnalysis";
 
+// BoardRoom components
+import Booking from "./BoardRoom/components/booking/Booking";
+import BoardRooms from "./BoardRoom/components/rooms/BoardRooms";
+import Settings from "./BoardRoom/components/settings/Settings";
+import Help from "./BoardRoom/components/help/Help";
 function App() {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const isAuthenticated = !!localStorage.getItem('token');
@@ -101,6 +107,8 @@ function App() {
         return <Navigate to="/technical/dashboard" />;
       case 'project':
         return <Navigate to="/project/dashboard" />;
+      case 'admin': 
+        return <Navigate to="/admin/dashboard" />;
       default:
         return <Navigate to="/unauthorized" />;
     }
@@ -192,6 +200,15 @@ function App() {
           {/* Routes for Technical Department */}
           <Route path="technical/*" element={<ProtectedRoute element={<TechnicalBaseLayout />} />}>
             <Route path="dashboard" element={<TechnicalDashboard />} />
+          </Route>
+
+          {/* Routes for BoardRoom Department */}
+          <Route path="boardroom/*" element={<ProtectedRoute element={<BoardRoomBaseLayout />} />}>
+            <Route path="dashboard" element={<BoardRoomDashboard />} />
+            <Route path="booking" element={<Booking />} />
+            <Route path="rooms" element={<BoardRooms />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="help" element={<Help />} />
           </Route>
 
           <Route path="/unauthorized" element={<UnauthorizedPage />} />

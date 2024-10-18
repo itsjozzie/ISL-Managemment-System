@@ -13,6 +13,7 @@ import {
   MdOutlineAccountCircle,
   MdExpandLess,
   MdExpandMore,
+  MdOutlineMeetingRoom,
   MdOutlineLogout
 } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -143,6 +144,12 @@ const FinanceSidebar = () => {
                 { path: "analytics/kpis", label: "KPIs" },
                 { path: "analytics/trends", label: "Trends" },
               ])}
+            </li>
+            <li className="menu-item">
+              <Link to="boardroom" className="menu-link">
+                <span className="menu-link-icon"><MdOutlineMeetingRoom size={20} /></span>
+                <span className="menu-link-text">Boardroom</span>
+              </Link>
             </li>
             <li className={`menu-item ${openMenus.settings ? 'open' : ''}`}>
               <div onClick={() => toggleMenu('settings')} className="menu-link">

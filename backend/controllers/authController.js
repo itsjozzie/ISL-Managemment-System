@@ -7,7 +7,7 @@ export const register = (req, res) => {
   const { name, email, password, confirmPassword, role } = req.body;
 
   // Validate role
-  const validRoles = ['finance', 'hr', 'project', 'sales', 'operation', 'technical'];
+  const validRoles = ['finance', 'hr', 'project', 'sales', 'operation', 'technical','admin'];
   if (!validRoles.includes(role)) {
     return res.status(400).json({ message: 'Invalid role' });
   }

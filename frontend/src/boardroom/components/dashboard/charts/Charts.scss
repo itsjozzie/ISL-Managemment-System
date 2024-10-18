@@ -1,0 +1,31 @@
+.charts {
+    background-color: var(--light-bg-color);
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  
+    h2 {
+      margin-bottom: 20px;
+      color: var(--primary-color);
+      font-size: 1.8rem;
+    }
+  
+    p {
+      margin-bottom: 15px;
+      color: var(--base-text-color);
+      font-size: 1.1rem;
+    }
+  
+    .chart-placeholder {
+      height: 200px; // Placeholder height for chart
+      background-color: var(--card-bg-color);
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--secondary-color);
+      font-weight: bold;
+    }
+  }
+  
