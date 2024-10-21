@@ -46,11 +46,6 @@ import AddClient from "./project_department/components/clients/AddClient";
 import ClientDetail from "./project_department/components/clients/ClientDetail";
 import ClientInteractions from "./project_department/components/clients/ClientInteractions";
 
-// Authentication components
-import LoginPage from "./login/LoginPage";
-import RegisterPage from "./login/RegisterPage";
-import LogoutPage from "./login/LogoutPage";
-
 // Finance department components
 import Accounts from "./finance_department/components/accounts/Accounts";
 import AccountsPayable from "./finance_department/components/accounts/AccountsPayable";
@@ -76,10 +71,15 @@ import SalesExpenseReports from "./sales_department/components/reports/ExpenseRe
 import SalesRevenueAnalysis from "./sales_department/components/reports/RevenueAnalysis";
 
 // BoardRoom components
-import Booking from "./BoardRoom/components/booking/Booking";
-import BoardRooms from "./BoardRoom/components/rooms/BoardRooms";
-import Settings from "./BoardRoom/components/settings/Settings";
-import Help from "./BoardRoom/components/help/Help";
+import Bookings from "./boardroom/components/booking/Bookings";
+import UpcomingBookings from "./boardroom/components/booking/UpcomingBookings";
+import BookingHistory from "./boardroom/components/booking/BookingHistory";
+
+// Authentication components
+import LoginPage from "./login/LoginPage";
+import RegisterPage from "./login/RegisterPage";
+import LogoutPage from "./login/LogoutPage";
+
 function App() {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const isAuthenticated = !!localStorage.getItem('token');
@@ -107,8 +107,8 @@ function App() {
         return <Navigate to="/technical/dashboard" />;
       case 'project':
         return <Navigate to="/project/dashboard" />;
-      case 'admin': 
-        return <Navigate to="/admin/dashboard" />;
+      case 'admin':
+        return <Navigate to="/boardroom/dashboard" />; 
       default:
         return <Navigate to="/unauthorized" />;
     }
@@ -205,10 +205,10 @@ function App() {
           {/* Routes for BoardRoom Department */}
           <Route path="boardroom/*" element={<ProtectedRoute element={<BoardRoomBaseLayout />} />}>
             <Route path="dashboard" element={<BoardRoomDashboard />} />
-            <Route path="booking" element={<Booking />} />
-            <Route path="rooms" element={<BoardRooms />} />
-            <Route path="settings" element={<Settings />} />
-            <Route path="help" element={<Help />} />
+            <Route path="bookings/*" element={<Bookings />} >
+              <Route path="upcoming" element={<UpcomingBookings />} />
+              <Route path="history" element={<BookingHistory />} />
+            </Route>
           </Route>
 
           <Route path="/unauthorized" element={<UnauthorizedPage />} />

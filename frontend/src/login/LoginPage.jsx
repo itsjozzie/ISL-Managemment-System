@@ -47,6 +47,9 @@ function LoginPage() {
 
       // Redirect user based on role
       switch (role) {
+        case 'admin': // Redirect admin to BoardRoom dashboard
+          navigate("/boardroom/dashboard");
+          break;
         case 'finance':
           navigate("/finance/dashboard");
           break;
@@ -64,9 +67,6 @@ function LoginPage() {
           break;
         case 'technical':
           navigate("/technical/dashboard");
-          break;
-        case 'admin':
-          navigate("/admin/dashboard");
           break;
         default:
           navigate("/"); 

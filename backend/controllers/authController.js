@@ -6,8 +6,8 @@ import db from '../config/db.js';
 export const register = (req, res) => {
   const { name, email, password, confirmPassword, role } = req.body;
 
-  // Validate role
-  const validRoles = ['finance', 'hr', 'project', 'sales', 'operation', 'technical','admin'];
+  // Validate the provided role
+  const validRoles = ['finance', 'hr', 'project', 'sales', 'operation', 'technical', 'admin'];
   if (!validRoles.includes(role)) {
     return res.status(400).json({ message: 'Invalid role' });
   }
@@ -20,7 +20,7 @@ export const register = (req, res) => {
   // Hash the password
   const hashedPassword = bcrypt.hashSync(password, 8);
 
-  // Check if email already exists
+  // Check if email already exists in the database
   db.query('SELECT * FROM users WHERE email = ?', [email], (err, results) => {
     if (err) {
       console.error('Database error:', err);
@@ -31,14 +31,14 @@ export const register = (req, res) => {
       return res.status(400).json({ message: 'Email already exists' });
     }
 
-    // Insert user into the database
+    // Insert the new user into the database
     db.query(
       'INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)',
       [name, email, hashedPassword, role],
       (err, result) => {
         if (err) {
           console.error('Database error:', err);
-          return res.status(500).json({ message: 'Database error' });
+          return res.status(500).json({ message: 'Database error during user insertion' });
         }
         return res.status(201).json({ message: 'User registered successfully' });
       }
@@ -63,7 +63,7 @@ export const login = (req, res) => {
 
     const user = results[0];
 
-    // Validate password
+    // Validate the password
     const isPasswordValid = bcrypt.compareSync(password, user.password);
     if (!isPasswordValid) {
       return res.status(401).json({ message: 'Invalid password' });
@@ -77,7 +77,7 @@ export const login = (req, res) => {
     return res.json({
       message: 'Login successful',
       token,
-      role: user.role
+      role: user.role // Include role to identify user permissions
     });
   });
 };
@@ -92,9 +92,11 @@ export const checkEmail = (req, res) => {
       console.error('Database error:', err);
       return res.status(500).json({ message: 'Database error' });
     }
+
     if (results.length === 0) {
       return res.status(404).json({ message: 'Invalid email address' });
     }
+
     res.status(200).json({ message: 'Email is valid' });
   });
 };

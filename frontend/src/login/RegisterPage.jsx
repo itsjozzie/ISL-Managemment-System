@@ -8,11 +8,22 @@ function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [role, setRole] = useState('project'); 
+  const [role, setRole] = useState('project'); // Default role is 'project'
+  const [loading, setLoading] = useState(false); // Loading state
   const navigate = useNavigate();
 
+  // Function to handle the registration form submission
   const handleRegister = async (e) => {
     e.preventDefault();
+    
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      alert('Passwords do not match!');
+      return;
+    }
+
+    setLoading(true); // Set loading state
+
     try {
       const response = await axios.post('http://localhost:5000/api/auth/register', {
         name,
@@ -21,10 +32,14 @@ function RegisterPage() {
         confirmPassword,
         role
       });
+
       alert(response.data.message);
       navigate('/login');
     } catch (error) {
-      alert(error.response ? error.response.data.message : 'An error occurred');
+      // Error handling with fallback message
+      alert(error.response?.data?.message || 'An error occurred during registration');
+    } finally {
+      setLoading(false); // Reset loading state after request
     }
   };
 
@@ -43,6 +58,7 @@ function RegisterPage() {
               required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="register-email">Email:</label>
             <input
@@ -53,6 +69,7 @@ function RegisterPage() {
               required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="register-password">Password:</label>
             <input
@@ -63,6 +80,7 @@ function RegisterPage() {
               required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="register-confirm-password">Confirm Password:</label>
             <input
@@ -73,6 +91,7 @@ function RegisterPage() {
               required
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="register-role">Role:</label>
             <select
@@ -90,9 +109,14 @@ function RegisterPage() {
               <option value="admin">Admin</option>
             </select>
           </div>
-          <button type="submit">Register</button>
+
+          <button type="submit" disabled={loading}>
+            {loading ? 'Registering...' : 'Register'}
+          </button>
         </form>
-        <p>Already have an account? <a href="/login">Login here</a></p>
+        <p>
+          Already have an account? <a href="/login">Login here</a>
+        </p>
       </div>
     </div>
   );

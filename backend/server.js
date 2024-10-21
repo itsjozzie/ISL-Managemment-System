@@ -8,16 +8,15 @@ import clientRoutes from './routes/clientsRoutes.js';
 import assignmentRoutes from './routes/assignmentRoutes.js';
 
 const app = express();
-const PORT = 5000;  // Hardcode port number
+const PORT = 5000;  
 
-// Update CORS configuration to allow requests from both origins
+
 app.use(cors({ 
-  origin: ['http://localhost:3000', 'http://localhost:5173'], // Allow both origins
+  origin: ['http://localhost:3000', 'http://localhost:5173'], 
   credentials: true 
 }));
 app.use(bodyParser.json());
 
-// Routes
 app.use('/api/personnel', personnelRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
