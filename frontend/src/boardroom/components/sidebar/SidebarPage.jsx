@@ -69,14 +69,14 @@ const SidebarPage = () => {
       <div className="sidebar-body">
         <div className="sidebar-menu">
           <ul className="menu-list">
-            <li className="menu-item">
-              <Link to="dashboard" className="menu-link dashboard-link">
-                <span className="menu-link-icon"><MdOutlineGridView size={20} /></span>
+          <li className="menu-item">
+              <Link to="dashboard" className="menu-link active">
+                <span className="menu-link-icon"><MdOutlineGridView size={18} /></span>
                 <span className="menu-link-text">Dashboard</span>
               </Link>
             </li>
 
-            <li className={`menu-item ${openMenus.booking ? 'open' : ''}`}>
+            <li className={`menu-item ${openMenus.booking ? 'open' : ''}`} >
               <div onClick={() => toggleMenu('booking')} className="menu-link">
                 <span className="menu-link-icon"><MdOutlineMeetingRoom size={20} /></span>
                 <span className="menu-link-text">Booking</span>
