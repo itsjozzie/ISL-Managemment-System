@@ -1,4 +1,5 @@
 import express from 'express';
+// eslint-disable-next-line import/namespace
 import { getAccountsPayable, getAccountPayable, createAccountPayable, updateAccountPayable, deleteAccountPayable } from '../controllers/accountsPayableController.js';
 
 const router = express.Router();

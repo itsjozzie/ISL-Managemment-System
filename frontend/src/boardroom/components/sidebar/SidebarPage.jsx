@@ -85,7 +85,7 @@ const SidebarPage = () => {
                 </span>
               </div>
               {renderSubMenu('booking', [
-                { path: 'booking/upcoming', label: 'Upcoming Bookings' },
+                { path: 'boardroom/booking/upcoming', label: 'Upcoming Bookings' },
                 { path: 'booking/history', label: 'Booking History' },
               ])}
             </li>
