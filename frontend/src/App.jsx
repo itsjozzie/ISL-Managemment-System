@@ -57,8 +57,15 @@ import Reports from "./finance_department/components/reports/Reports";
 import FinancialReports from "./finance_department/components/reports/FinancialReports";
 import ExpenseReports from "./finance_department/components/reports/ExpenseReports";
 import RevenueAnalysis from "./finance_department/components/reports/RevenueAnalysis";
+import Boardroom from "./finance_department/components/boardroom/Boardroom";
+import AddRequest from "./finance_department/components/boardroom/AddRequest";
+import ViewRequest from "./finance_department/components/boardroom/ViewRequest";
+import BookingCalendar from "./finance_department/components/boardroom/BookingCalender";
+import BookingStatus from "./finance_department/components/boardroom/BookingStatus";
+import BoardroomList from "./finance_department/components/boardroom/BoardroomList";
+import FinanceNotifications from "./finance_department/components/boardroom/Notifications";
 
-// Sales department components (added)
+// Sales department components 
 import SalesAccounts from "./sales_department/components/accounts/Accounts";
 import SalesAccountsPayable from "./sales_department/components/accounts/AccountsPayable";
 import SalesAccountsReceivable from "./sales_department/components/accounts/AccountsReceivable";
@@ -74,6 +81,11 @@ import SalesRevenueAnalysis from "./sales_department/components/reports/RevenueA
 import Bookings from "./boardroom/components/booking/Bookings";
 import UpcomingBookings from "./boardroom/components/booking/UpcomingBookings";
 import BookingHistory from "./boardroom/components/booking/BookingHistory";
+import BookingForm from "./boardroom/components/booking/BookingForm";
+import Managements from "./boardroom/components/management/Managements"
+import UserManagement from "./boardroom/components/management/UserManagement";
+import RequestManagement from "./boardroom/components/management/RequestManagement";
+import Notifications from "./boardroom/components/management/Notifications";
 
 // Authentication components
 import LoginPage from "./login/LoginPage";
@@ -129,21 +141,21 @@ function App() {
           {/* Routes for Project Department */}
           <Route path="project/*" element={<ProtectedRoute element={<BaseLayout />} />}>
             <Route path="dashboard" element={<DashboardScreen />} />
-            <Route path="projects/*" element={<Projects />} >
+            <Route path="projects/*" element={<Projects />}>
               <Route path="all" element={<AllProjects />} />
               <Route path="add" element={<AddProject />} />
               <Route path="update/:id" element={<UpdateProject />} />
               <Route path=":id" element={<ProjectDetail />} />
               <Route path="reports" element={<ProjectReports />} />
             </Route>
-            <Route path="personnel/*" element={<Personnel />} >
+            <Route path="personnel/*" element={<Personnel />}>
               <Route path="all" element={<AllPersonnel />} />
               <Route path="add" element={<AddPersonnel />} />
               <Route path="assignments" element={<Assignments />} />
               <Route path="details/:id" element={<PersonnelDetails />} />
               <Route path="update/:id" element={<UpdatePersonnel />} />
             </Route>
-            <Route path="clients/*" element={<Clients />} >
+            <Route path="clients/*" element={<Clients />}>
               <Route path="all" element={<Clients />} />
               <Route path="add" element={<AddClient />} />
               <Route path="details/:id" element={<ClientDetail />} />
@@ -154,18 +166,26 @@ function App() {
           {/* Routes for Finance Department */}
           <Route path="finance/*" element={<ProtectedRoute element={<FinanceBaseLayout />} />}>
             <Route path="dashboard" element={<FinanceDashboard />} />
-            <Route path="accounts/*" element={<Accounts />} >
+            <Route path="accounts/*" element={<Accounts />}>
               <Route path="payable" element={<AccountsPayable />} />
               <Route path="receivable" element={<AccountsReceivable />} />
             </Route>
-            <Route path="budgets/*" element={<Budgets />} >
+            <Route path="budgets/*" element={<Budgets />}>
               <Route path="current" element={<CurrentBudget />} />
               <Route path="requests" element={<BudgetRequests />} />
             </Route>
-            <Route path="reports/*" element={<Reports />} >
+            <Route path="reports/*" element={<Reports />}>
               <Route path="financial" element={<FinancialReports />} />
               <Route path="expense" element={<ExpenseReports />} />
               <Route path="revenue" element={<RevenueAnalysis />} />
+            </Route>
+            <Route path="boardroom/*" element={<Boardroom />}>
+              <Route path="add-request" element={<AddRequest />} />
+              <Route path="view-request" element={<ViewRequest />} />
+              <Route path="booking-calendar" element={<BookingCalendar />} />
+              <Route path="booking-status" element={<BookingStatus />} />
+              <Route path="boardroom-list" element={<BoardroomList />} />
+              <Route path="notifications" element={<FinanceNotifications />} />
             </Route>
           </Route>
 
@@ -177,15 +197,15 @@ function App() {
           {/* Routes for Sales Department */}
           <Route path="sales/*" element={<ProtectedRoute element={<SalesBaseLayout />} />}>
             <Route path="dashboard" element={<SalesDashboard />} />
-            <Route path="accounts/*" element={<SalesAccounts />} >
+            <Route path="accounts/*" element={<SalesAccounts />}>
               <Route path="payable" element={<SalesAccountsPayable />} />
               <Route path="receivable" element={<SalesAccountsReceivable />} />
             </Route>
-            <Route path="budgets/*" element={<SalesBudgets />} >
+            <Route path="budgets/*" element={<SalesBudgets />}>
               <Route path="current" element={<SalesCurrentBudget />} />
               <Route path="requests" element={<SalesBudgetRequests />} />
             </Route>
-            <Route path="reports/*" element={<SalesReports />} >
+            <Route path="reports/*" element={<SalesReports />}>
               <Route path="financial" element={<SalesFinancialReports />} />
               <Route path="expense" element={<SalesExpenseReports />} />
               <Route path="revenue" element={<SalesRevenueAnalysis />} />
@@ -205,9 +225,11 @@ function App() {
           {/* Routes for BoardRoom Department */}
           <Route path="boardroom/*" element={<ProtectedRoute element={<BoardRoomBaseLayout />} />}>
             <Route path="dashboard" element={<BoardRoomDashboard />} />
-            <Route path="bookings/*" element={<Bookings />} >
-              <Route path="upcoming" element={<UpcomingBookings />} />
-              <Route path="history" element={<BookingHistory />} />
+            <Route path="bookings" element={<Bookings />} />
+            <Route path="managements/*" element={<Managements />}>
+              <Route path="user" element={<UserManagement />} />
+              <Route path="request" element={<RequestManagement />} />
+              <Route path="notification" element={<Notifications />} />
             </Route>
           </Route>
 

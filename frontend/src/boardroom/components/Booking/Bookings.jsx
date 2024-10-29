@@ -3,7 +3,8 @@ import './Bookings.scss';
 
 const Bookings = () => {
   return (
-    <div className="booking">
+    <div className="booking-container">
+      
       <Outlet /> 
     </div>
   );

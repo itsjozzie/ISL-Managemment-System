@@ -89,6 +89,7 @@ const FinanceSidebar = () => {
                 <span className="menu-link-text">Dashboard</span>
               </Link>
             </li>
+
             <li className={`menu-item ${openMenus.accounts ? 'open' : ''}`}>
               <div onClick={() => toggleMenu('accounts')} className="menu-link">
                 <span className="menu-link-icon"><MdOutlineAccountBalance size={20} /></span>
@@ -100,6 +101,7 @@ const FinanceSidebar = () => {
                 { path: "accounts/receivable", label: "Accounts Receivable" },
               ])}
             </li>
+
             <li className={`menu-item ${openMenus.budgets ? 'open' : ''}`}>
               <div onClick={() => toggleMenu('budgets')} className="menu-link">
                 <span className="menu-link-icon"><MdOutlineAttachMoney size={20} /></span>
@@ -111,6 +113,7 @@ const FinanceSidebar = () => {
                 { path: "budgets/requests", label: "Budget Requests" },
               ])}
             </li>
+
             <li className={`menu-item ${openMenus.reports ? 'open' : ''}`}>
               <div onClick={() => toggleMenu('reports')} className="menu-link">
                 <span className="menu-link-icon"><MdOutlineAssessment size={20} /></span>
@@ -123,6 +126,7 @@ const FinanceSidebar = () => {
                 { path: "reports/revenue", label: "Revenue Analysis" },
               ])}
             </li>
+
             <li className={`menu-item ${openMenus.compliance ? 'open' : ''}`}>
               <div onClick={() => toggleMenu('compliance')} className="menu-link">
                 <span className="menu-link-icon"><MdOutlineGavel size={20} /></span>
@@ -134,6 +138,7 @@ const FinanceSidebar = () => {
                 { path: "compliance/overview", label: "Compliance Overview" },
               ])}
             </li>
+            
             <li className={`menu-item ${openMenus.analytics ? 'open' : ''}`}>
               <div onClick={() => toggleMenu('analytics')} className="menu-link">
                 <span className="menu-link-icon"><MdOutlineTrendingUp size={20} /></span>
@@ -145,12 +150,25 @@ const FinanceSidebar = () => {
                 { path: "analytics/trends", label: "Trends" },
               ])}
             </li>
-            <li className="menu-item">
-              <Link to="boardroom" className="menu-link">
-                <span className="menu-link-icon"><MdOutlineMeetingRoom size={20} /></span>
-                <span className="menu-link-text">Boardroom</span>
-              </Link>
-            </li>
+
+            <li className={`menu-item ${openMenus.boardroom ? 'open' : ''}`}>
+          <div onClick={() => toggleMenu('boardroom')} className="menu-link">
+            <span className="menu-link-icon"><MdOutlineMeetingRoom size={20} /></span>
+            <span className="menu-link-text">Boardroom</span>
+            <span className="menu-link-expand-icon">
+              {openMenus.boardroom ? <MdExpandLess size={20} /> : <MdExpandMore size={20} />}
+            </span>
+          </div>
+          {renderSubMenu('boardroom', [
+            { path: "boardroom/add-request", label: "Add Request" },
+            { path: "boardroom/view-requests", label: "View Requests" },
+            { path: "boardroom/booking-calendar", label: "Booking Calendar" },
+            { path: "boardroom/booking-status", label: "Booking Status" },
+            { path: "boardroom/boardroom-list", label: "Boardroom List" },
+            { path: "boardroom/notifications", label: "Notifications" },
+          ], true)}
+        </li>
+
             <li className={`menu-item ${openMenus.settings ? 'open' : ''}`}>
               <div onClick={() => toggleMenu('settings')} className="menu-link">
                 <span className="menu-link-icon"><MdOutlineSettings size={20} /></span>
@@ -163,6 +181,7 @@ const FinanceSidebar = () => {
                 { path: "settings/integrations", label: "Integrations" },
               ])}
             </li>
+
             <li className={`menu-item ${openMenus.support ? 'open' : ''}`}>
               <div onClick={() => toggleMenu('support')} className="menu-link">
                 <span className="menu-link-icon"><MdOutlineSupport size={20} /></span>
@@ -174,6 +193,7 @@ const FinanceSidebar = () => {
                 { path: "support/contact", label: "Contact Support" },
               ])}
             </li>
+
             <li className={`menu-item ${openMenus.userProfile ? 'open' : ''}`}>
               <div onClick={() => toggleMenu('userProfile')} className="menu-link">
                 <span className="menu-link-icon"><MdOutlineAccountCircle size={20} /></span>
@@ -181,13 +201,14 @@ const FinanceSidebar = () => {
                 <span className="menu-link-expand-icon">{openMenus.userProfile ? <MdExpandLess size={20} /> : <MdExpandMore size={20} />}</span>
               </div>
               {renderSubMenu('userProfile', [
-                { path: "profile/view", label: "View Profile" },
-                { path: "profile/edit", label: "Edit Profile" },
+                { path: "profile/account", label: "Account Settings" },
+                { path: "profile/notification", label: "Notification Settings" },
               ])}
             </li>
-            <li className="menu-item logout">
+
+            <li className="menu-item">
               <Link to="/logout" className="menu-link">
-                <span className="menu-link-icon"><MdOutlineLogout size={20} /></span>
+                <span className="menu-link-icon"><MdOutlineLogout size={18} /></span>
                 <span className="menu-link-text">Logout</span>
               </Link>
             </li>
