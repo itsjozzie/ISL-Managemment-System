@@ -3,6 +3,6 @@ import { getDepartments } from '../controllers/departmentController.js';
 
 const router = express.Router();
 
-router.get('/', getDepartments);
+router.get('/departments', getDepartments);
 
 export default router;
